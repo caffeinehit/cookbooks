@@ -19,7 +19,7 @@ This repository makes use of submodules, so make sure that you init them too:
 
 The nginx recipe downloads, compiles and installs nginx.
 
-* Default attributes: [here](blob/master/nginx/attributes/default.rb)
+* Default attributes: [here](/caffeinehit/cookbooks/blob/master/nginx/attributes/default.rb)
 * Usage:
 
         inclue_recipe "nginx"
@@ -28,7 +28,7 @@ The nginx recipe downloads, compiles and installs nginx.
 
 The nodejs recipe downloads, compiles and installs node.
 
-* Default attributes: [here](blob/master/nodejs/attributes/default.rb)
+* Default attributes: [here](/caffeinehit/cookbooks/blob/master/nodejs/attributes/default.rb)
 * Usage:
 
         inclue_recipe "nodejs"
@@ -38,7 +38,7 @@ The nodejs recipe downloads, compiles and installs node.
 
 The coffeescript recipe downloads and installs coffee.
 
-* Default attributes: [here](blob/master/coffeescript/attributes/default.rb)
+* Default attributes: [here](/caffeinehit/cookbooks/blob/master/coffeescript/attributes/default.rb)
 * Usage:
 
         inclue_recipe "coffeescript"
@@ -54,6 +54,6 @@ The sass recipe downloads and install sass.
 ## solr
 
 Installs jetty/solr to power your search. Override the 
-[schema.xml](blob/master/solr/files/default/schema.xml) to suit the index
+[schema.xml](/caffeinehit/cookbooks/blob/master/solr/files/default/schema.xml) to suit the index
 to your needs.
 
