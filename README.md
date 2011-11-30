@@ -49,11 +49,32 @@ The sass recipe downloads and install sass.
 
 * Usage:
 
-    include_recipe "sass"
+        include_recipe "sass"
 
 ## solr
 
 Installs jetty/solr to power your search. Override the 
 [schema.xml](/caffeinehit/cookbooks/blob/master/solr/files/default/schema.xml) to suit the index
 to your needs.
+
+## Upstart
+
+Creates upstart scripts you can use to create [upstart](http://upstart.ubuntu.com/) 
+scripts.
+
+* Usage:
+
+    `application/recipes/default.rb`:
+    
+        upstart "gunicorn" do
+            user "application"
+            command "python /home/application/manage.py run_gunicorn"
+        end
+
+
+    You can then use `start gunicorn` and `stop gunicorn` to start / stop the
+    service on your server or as a service inside Chef.
+
+The process will automatically create a `/var/log/<username>/<process-name>.log`
+file owned by the specified user - a bit like foreman does.
 
