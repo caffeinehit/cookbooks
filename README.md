@@ -22,7 +22,7 @@ The nginx recipe downloads, compiles and installs nginx.
 * Default attributes: [here](/caffeinehit/cookbooks/blob/master/nginx/attributes/default.rb)
 * Usage:
 
-        inclue_recipe "nginx"
+        include_recipe "nginx"
 
 ## nodejs
 
@@ -31,7 +31,7 @@ The nodejs recipe downloads, compiles and installs node.
 * Default attributes: [here](/caffeinehit/cookbooks/blob/master/nodejs/attributes/default.rb)
 * Usage:
 
-        inclue_recipe "nodejs"
+        include_recipe "nodejs"
 
 
 ## coffeescript
@@ -41,7 +41,7 @@ The coffeescript recipe downloads and installs coffee.
 * Default attributes: [here](/caffeinehit/cookbooks/blob/master/coffeescript/attributes/default.rb)
 * Usage:
 
-        inclue_recipe "coffeescript"
+        include_recipe "coffeescript"
 
 ## sass
 
