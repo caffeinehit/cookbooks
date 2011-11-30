@@ -57,24 +57,22 @@ Installs jetty/solr to power your search. Override the
 [schema.xml](/caffeinehit/cookbooks/blob/master/solr/files/default/schema.xml) to suit the index
 to your needs.
 
-## Upstart
+## upstart
 
-Creates upstart scripts you can use to create [upstart](http://upstart.ubuntu.com/) 
-scripts.
+Creates an [upstart](http://upstart.ubuntu.com/)  script you can use to 
+control services you're deploying. 
 
 * Usage:
 
-    `application/recipes/default.rb`:
-    
-        upstart "gunicorn" do
+        upstart_script "gunicorn" do
             user "application"
             command "python /home/application/manage.py run_gunicorn"
         end
 
 
-    You can then use `start gunicorn` and `stop gunicorn` to start / stop the
-    service on your server or as a service inside Chef.
+    Use `start gunicorn` and `stop gunicorn` on your server or as a service
+    inside Chef to start / stop gunicorn.
 
-The process will automatically create a `/var/log/<username>/<process-name>.log`
-file owned by the specified user - a bit like foreman does.
+    The process will automatically create a `/var/log/<username>/<process-name>.log`
+    file owned by the specified user - a bit like foreman does.
 
