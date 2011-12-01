@@ -6,6 +6,13 @@ service "jetty" do
     action :enable
 end
 
+cookbook_file "/etc/solr/conf/schema.xml" do
+    source "schema.xml"
+    owner "root"
+    group "root"
+    mode "644"
+end
+
 cookbook_file "/etc/default/jetty" do
   source "default"
   owner "root"
@@ -14,11 +21,4 @@ cookbook_file "/etc/default/jetty" do
   notifies :restart, "service[jetty]"
 end
 
-cookbook_file "/etc/solr/conf/schema.xml" do
-    source "schema.xml"
-    owner "root"
-    group "root"
-    mode "644"
-    notifies :restart, "service[jetty]"
-end
 
