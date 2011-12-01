@@ -24,21 +24,24 @@ def save_keys(resource)
     directory "#{resource.homeroot}/#{resource.user}/.ssh" do
         owner resource.user
         mode 0700
-        action: create
+        action :create
     end
+    
     template "#{resource.homeroot}/#{resource.user}/.ssh/authorized_keys" do
         cookbook "authorized"
         source "authorized_keys.erb"
+        owner resource.user
         mode 0600
         variables (:keys => resource.keys)
-    end
+    end    
 end
 
 private
 def delete_keys
-    ::File.delete("#{resource.homeroot}/#{@new_resource.user}/.ssh/authorized_keys")
+    ::File.delete("#{@new_resource.homeroot}/#{@new_resource.user}/.ssh/authorized_keys")
 end
 
 private
 def exists?
-    ::File.exists?("#{resource.homeroot}/#{@new_resource.user}/.ssh/authorized_keys")
+    ::File.exists?("#{@new_resource.homeroot}/#{@new_resource.user}/.ssh/authorized_keys")
+end
