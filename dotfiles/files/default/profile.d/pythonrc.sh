@@ -1,0 +1,1 @@
+[ -f ~/.pythonrc.py ] && PYTHONSTARTUP=~/.pythonrc.py
