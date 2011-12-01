@@ -83,16 +83,16 @@ Python sessions remember what you've been doing.
 
 * Usage:
 
-    cookbook_file "/etc/profile.d/pythonrc.sh" do
-        source "profile.d/pythonrc.sh"
-        cookbook "dotfiles"
-        owner "root"
-    end
-    cookbook_file "/home/user/.pythonrc.py" do 
-        source "home/.pythonrc.py"
-        cookbook "dotfiles"
-        owner "user"
-    end
+        cookbook_file "/etc/profile.d/pythonrc.sh" do
+            source "profile.d/pythonrc.sh"
+            cookbook "dotfiles"
+            owner "root"
+        end
+        cookbook_file "/home/user/.pythonrc.py" do 
+            source "home/.pythonrc.py"
+            cookbook "dotfiles"
+            owner "user"
+        end
 
 
 ## authorized
@@ -101,12 +101,12 @@ Deploy your public SSH keys for passwordless authentication on the server.
 
 * Usage:
 
-    keys = ["ssh-rsa ...", "ssh-rsa ..."]
-    authorized_keys "your-user" do
-        keys keys
-        homeroot "/home"
-    end
-    authorized_keys "root" do
-        keys keys
-        homeroot "/"
-    end
+        keys = ["ssh-rsa ...", "ssh-rsa ..."]
+        authorized_keys "your-user" do
+            keys keys
+            homeroot "/home"
+        end
+        authorized_keys "root" do
+            keys keys
+            homeroot "/"
+        end
