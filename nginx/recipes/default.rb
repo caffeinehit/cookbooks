@@ -1,8 +1,5 @@
 include_recipe "build-essential"
 
-# First install standard nginx, then upgrade version through source
-package "nginx"
-
 # We need pcre libs
 package "libpcre3-dev"
 
@@ -29,12 +26,22 @@ bash "compile_nginx_source" do
         cd nginx-#{version} && ./configure #{compile_flags}
         make && make install
     EOH
-    creates "/usr/local/sbin/nginx"
+    creates "#{node[:nginx][:prefix]}/sbin/nginx"
 end
 
 directory "#{node[:nginx][:root]}" do
     owner node[:nginx][:user]
     action :create
+end
+
+directory "#{node[:nginx][:logs]}" do
+    owner node[:nginx][:user]
+end
+
+directory "#{node[:nginx][:conf]}" do
+    owner "root"
+    group "root"
+    mode "0644"
 end
 
 directory "#{node[:nginx][:conf]}/conf.d" do
@@ -49,28 +56,34 @@ directory "#{node[:nginx][:conf]}/sites-enabled" do
     mode "0644"
 end
 
+template "/etc/init/nginx.conf" do
+    source "nginx-upstart.conf.erb"
+    variables(:prefix => node[:nginx][:prefix])
+    owner "root"
+end
+
 service "nginx" do
     supports :status => true, :restart => true, :reload => true
-    action :enable
-    subscribes :restart, resources(:bash => "compile_nginx_source")
+    provider Chef::Provider::Service::Upstart
+    action [:enable, :start]
 end
 
 template "nginx.conf" do
-    path "#{node[:nginx][:conf]}/nginx.conf"
-    source "nginx.conf.erb"
-    owner "root"
-    group "root"
-    mode "0644"
-    notifies :restart, resources(:service => "nginx"), :immediately
+   path "#{node[:nginx][:conf]}/nginx.conf"
+   source "nginx.conf.erb"
+   owner "root"
+   group "root"
+   mode "0644"
+   notifies :restart, "service[nginx]", :immediately
 end
 
 template "default" do
-    path "#{node[:nginx][:conf]}/sites-enabled/default"
-    source "default.erb"
-    owner "root"
-    group "root"
-    mode "0644"
-    notifies :restart, resources(:service => "nginx"), :immediately
+   path "#{node[:nginx][:conf]}/sites-enabled/default.conf"
+   source "default.erb"
+   owner "root"
+   group "root"
+   mode "0644"
+   notifies :restart, "service[nginx]", :immediately
 end
 
 
