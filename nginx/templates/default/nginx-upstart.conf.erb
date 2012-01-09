@@ -1,29 +1,8 @@
-# nginx upstart script
-# taken from the nginx wiki at http://wiki.nginx.org/Upstart
-
-# nginx
- 
-description "nginx http daemon"
-author "George Shammas <georgyo@gmail.com>"
- 
 start on (filesystem and net-device-up IFACE=lo)
 stop on runlevel [!2345]
+
+console output
  
-env DAEMON=<%= @prefix %>/sbin/nginx
-env PID=/var/run/nginx.pid
- 
-expect fork
+exec nginx -g "daemon off;"
+
 respawn
- 
-pre-start script
-        $DAEMON -t
-        if [ $? -ne 0 ]
-                then exit $?
-        fi
-end script
- 
-post-stop script
-    start-stop-daemon --stop --pidfile $PID --name nginx --exec $DAEMON --signal TERM
-end script
- 
-exec $DAEMON
