@@ -32,7 +32,7 @@ def save_keys(resource)
         source "authorized_keys.erb"
         owner resource.user
         mode 0600
-        variables (:keys => resource.keys)
+        variables(:keys => resource.keys)
     end    
 end
 

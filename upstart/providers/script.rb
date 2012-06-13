@@ -25,7 +25,7 @@ def save_file(resource)
     template "/etc/init/#{resource.name}.conf" do
         cookbook "upstart"
         source "upstart.erb"
-        variables (:resource => resource)
+        variables(:resource => resource)
     end
 end
 
